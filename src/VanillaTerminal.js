@@ -54,17 +54,17 @@ class Terminal {
       setTimeout(() => DOM.input.scrollIntoView(), 10);
     }, false);
 
-    addEventListener('click', () => DOM.input.focus(), false);
-    DOM.output.addEventListener('click', event => event.stopPropagation(), false);
+    DOM.container.addEventListener('click', () => DOM.input.focus(), false);
+    // DOM.output.addEventListener('click', event => event.stopPropagation(), false);
     DOM.input.addEventListener('keyup', this.onKeyUp, false);
     DOM.input.addEventListener('keydown', this.onKeyDown, false);
-    DOM.command.addEventListener('click', () => DOM.input.focus(), false);
+    // DOM.command.addEventListener('click', () => DOM.input.focus(), false);
 
-    addEventListener('keyup', (event) => {
-      DOM.input.focus();
-      event.stopPropagation();
-      event.preventDefault();
-    }, false);
+    // addEventListener('keyup', (event) => {
+    //   DOM.input.focus();
+    //   event.stopPropagation();
+    //   event.preventDefault();
+    // }, false);
   }
 
   onKeyUp = (event) => {
@@ -150,6 +150,11 @@ class Terminal {
     this.DOM.prompt.innerHTML = `${prompt}:`;
     this.resetCommand();
     this.DOM.command.classList.add('input');
+    this.DOM.input.focus();
+  }
+
+  promptSync(prompt) {
+    return new Promise(resolve => this.prompt(prompt, resolve))
   }
 
   onInput(callback) {
