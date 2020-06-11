@@ -83,6 +83,21 @@ class Terminal {
     }
   }
 
+
+  /*use to interrup prompting for a sync input*/
+  interruptPrompt = () => {
+    const {
+      commands = {}, DOM, history, onInputCallback, state,
+    } = this;
+    if (state.prompt) {
+      state.prompt = false;
+      this.onAskCallback(command);
+      this.setPrompt();
+      this.resetCommand();
+      return;
+    }
+  }
+
   onKeyDown = ({ keyCode }) => {
     const {
       commands = {}, DOM, history, onInputCallback, state,
