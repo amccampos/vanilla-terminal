@@ -91,7 +91,7 @@ class Terminal {
     } = this;
     if (state.prompt) {
       state.prompt = false;
-      this.onAskCallback(command);
+      this.onAskCallback('');
       this.setPrompt();
       this.resetCommand();
       return;
